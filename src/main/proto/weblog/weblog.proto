@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package weblog;
+
+option java_package = "com.proto.weblog";
+
+option java_multiple_files = true;
+
+message Weblog {
+    string id = 1;
+    string author_id = 2;
+    string title = 3;
+    string content = 4;
+}
+
+
+message CreateWeblogRequest {
+    Weblog weblog = 1;
+}
+
+message CreateWeblogResponse {
+    // Will return the id of Weblog created in mongoDB
+    Weblog weblog = 1;
+}
+
+message ReadWeblogRequest {
+    string id = 1;
+}
+
+message ReadWeblogResponse {
+    Weblog weblog = 1;
+}
+
+message UpdateWeblogRequest {
+    Weblog weblog = 1;
+}
+
+message UpdateWeblogResponse {
+    Weblog weblog = 1;
+}
+
+message DeleteWeblogRequest {
+    string weblog_id = 1;
+}
+
+message DeleteWeblogResponse {
+    string weblog_id = 1;
+}
+
+message ListWeblogRequest {
+
+}
+
+message ListWeblogResponse {
+    Weblog weblog = 1;
+}
+
+service WeblogService {
+    rpc CreateWeblog (CreateWeblogRequest) returns (CreateWeblogResponse) {
+    };
+    
+    rpc ReadWeblog (ReadWeblogRequest) returns (ReadWeblogResponse) {
+    };
+
+    rpc UpdateWeblog (UpdateWeblogRequest) returns (UpdateWeblogResponse) {
+    };
+
+    rpc DeleteWeblog (DeleteWeblogRequest) returns (DeleteWeblogResponse) {
+    };
+
+    rpc ListWeblog (ListWeblogRequest) returns (stream ListWeblogResponse) {
+    };
+}
